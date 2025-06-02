@@ -22,8 +22,15 @@ export default function PomodoroTimer() {
 
   return (
     <div
-      style={{ backgroundImage: `url('/mountain-pomodoro-1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      className="min-h-screen flex flex-col items-center justify-center p-6"
+      style={{ 
+        backgroundImage: `url('/mountain-pomdoro-1.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+        width: '100%'
+      }}
+      className="flex flex-col items-center justify-center p-6"
     >
       <h1 className="text-4xl font-bold mb-8 text-white drop-shadow-md">Pomodoro Timer</h1>
       <div className="text-6xl font-mono mb-6 text-white drop-shadow">{time}</div>
