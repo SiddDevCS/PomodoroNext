@@ -28,7 +28,8 @@ export default function PomodoroTimer() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
-        width: '100%'
+        width: '100%',
+        opacity: '75%',
       }}
       className="flex flex-col items-center justify-center p-6"
     >
