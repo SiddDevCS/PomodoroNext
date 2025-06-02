@@ -8,25 +8,25 @@ export default function PomodoroTimer() {
   const [isRunning, setIsRunning] = useState(false);
 
   const handleStart = () => {
-    // leave this space for backend timer logic
     setIsRunning(true);
   };
 
   const handlePause = () => {
-    // leave this space for backend timer pause logic
     setIsRunning(false);
   };
 
   const handleReset = () => {
-    // leave this space for backend reset logic
     setTime("25:00");
     setIsRunning(false);
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-rose-100 to-teal-100 p-6">
-      <h1 className="text-4xl font-bold mb-8">Pomodoro Timer</h1>
-      <div className="text-6xl font-mono mb-6">{time}</div>
+    <div
+      style={{ backgroundImage: `url('/mountain-pomodoro-1.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      className="min-h-screen flex flex-col items-center justify-center p-6"
+    >
+      <h1 className="text-4xl font-bold mb-8 text-white drop-shadow-md">Pomodoro Timer</h1>
+      <div className="text-6xl font-mono mb-6 text-white drop-shadow">{time}</div>
       <div className="flex space-x-4">
         {!isRunning ? (
           <Button onClick={handleStart} className="px-6 py-2 text-lg">
@@ -41,6 +41,6 @@ export default function PomodoroTimer() {
           Reset
         </Button>
       </div>
-    </main>
+    </div>
   );
 }
