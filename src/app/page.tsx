@@ -15,10 +15,14 @@ export default function PomodoroTimer() {
     setIsRunning(false);
   };
 
+  const handleResetSettings = () => {
+    
+  }
+
   return (
     <div
       style={{ 
-        backgroundImage: `url('/mountain-pomdoro-1.jpg')`,
+        backgroundImage: `url('/images-bg/pomodoro-bg1.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -57,19 +61,26 @@ export default function PomodoroTimer() {
       {/* This is the Settings Panel */}
       {showPanelSettings && (
         <div className="fixed inset-0 backdrop-blur-sm bg-black/10 z-50 flex items-center justify-center">
+          {/* White panel (main) */}
           <div className="bg-white rounded-xl shadow-xl p-6 w-80 relative">
+            {/* Settings Title */}
             <h2 className="text-xl font-bold text-center">Settings</h2>
 
+            {/* Subtitle */}
             <p className="text-sm text-center mt-2 text-gray-500">
               Choose what fits you best!</p>
 
+            {/* Reset settings button in panel */}
+            <Button onClick={handleResetSettings} className="px-6 py-2 text-lg flex justify-center">Reset Settings</Button>
 
+            {/* Custom button for exit panel */}
             <button
               onClick={() => setShowPanelSettings(false)}
               className="absolute top-2 right-2 text-gray-600 hover:text-black"
             >
               ✕
             </button>
+
           </div>
         </div>
       )}
