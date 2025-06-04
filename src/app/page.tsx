@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./components/ui/button";
-import Background from "./components/Background";
+import dynamic from 'next/dynamic';
 import BackgroundSettingsPanel from "./components/BackgroundSettings";
 import { BackgroundSettings } from "./types/background";
+
+const BackgroundWithNoSSR = dynamic(
+  () => import('./components/Background'),
+  { ssr: false }
+);
 
 export default function PomodoroTimer() {
   const [time, setTime] = useState("25:00");
@@ -39,7 +44,7 @@ export default function PomodoroTimer() {
 
   return (
     <>
-      <Background settings={backgroundSettings} />
+      <BackgroundWithNoSSR settings={backgroundSettings} />
       <div className="flex flex-col items-center justify-center p-6 relative min-h-screen w-full">
         <h1 className="text-4xl font-bold mb-8 text-white drop-shadow-md">Pomodoro Timer</h1>
         <div className="text-6xl font-mono mb-6 text-white drop-shadow">{time}</div>
