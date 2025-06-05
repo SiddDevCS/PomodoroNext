@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import BackgroundSettingsPanel from "./components/BackgroundSettings";
@@ -11,6 +11,14 @@ const BackgroundWithNoSSR = dynamic(
   () => import("./components/Background"),
   { ssr: false }
 );
+
+// Define the Quote interfaceAdd commentMore actions
+interface Quote {
+  id: number;
+  quote: string;
+  author: string;
+  category: string;
+}
 
 export default function Home() {
   const [showPanelSettings, setShowPanelSettings] = useState(false);
@@ -41,6 +49,65 @@ export default function Home() {
     setTimeout(() => setShowPanelSettings(false), 300);
   };
 
+    const [currentQuote, setCurrentQuote] = useState<Quote | null>(null);
+  const [showQuote, setShowQuote] = useState(true);
+
+  // Sample quotes data (replace with your actual quotes.json fetch)
+  const sampleQuotes: Quote[] = [
+    {
+      "id": 1,
+      "quote": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney",
+      "category": "motivation"
+    },
+    {
+      "id": 2,
+      "quote": "Don't stop when you're tired. Stop when you're done.",
+      "author": "Unknown",
+      "category": "perseverance"
+    },
+    {
+      "id": 3,
+      "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Winston Churchill",
+      "category": "perseverance"
+    },
+    {
+      "id": 4,
+      "quote": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Eleanor Roosevelt",
+      "category": "dreams"
+    },
+    {
+      "id": 5,
+      "quote": "It is during our darkest moments that we must focus to see the light.",
+      "author": "Aristotle",
+      "category": "hope"
+    }
+  ];
+
+  // Function to get random quote
+  const getRandomQuote = (quotes: Quote[]): Quote => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    return quotes[randomIndex];
+  };
+
+  // Load quotes on component mount
+  useEffect(() => {
+    // In a real implementation, you would fetch from your quotes.json file like this:
+    // fetch('/quotes.json')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     const randomQuote = getRandomQuote(data);
+    //     setCurrentQuote(randomQuote);
+    //   })
+    //   .catch(error => console.error('Error loading quotes:', error));
+
+    // For now, using sample data
+    const randomQuote = getRandomQuote(sampleQuotes);
+    setCurrentQuote(randomQuote);
+  }, []);
+
   return (
     <>
       <BackgroundWithNoSSR settings={backgroundSettings} />
@@ -58,6 +125,34 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
         </button>
+
+      {/* Quote Speech Bubble - Bottom Right Corner */}
+      {currentQuote && showQuote && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <div className="relative bg-white rounded-2xl shadow-lg p-4 max-w-xs border border-gray-200">
+            {/* Speech bubble tail */}
+            <div className="absolute bottom-0 right-6 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-white transform translate-y-full"></div>
+            Add commentMore actions
+            {/* Quote content */}
+            <div className="text-sm text-gray-700 mb-2 leading-relaxed">
+              "{currentQuote.quote}"
+            </div>
+            
+            {/* Author */}
+            <div className="text-xs text-gray-500 font-medium text-right">
+              — {currentQuote.author}
+            </div>
+            
+            {/* Close button */}
+            <button
+              onClick={() => setShowQuote(false)}
+              className="absolute top-1 right-2 text-gray-400 hover:text-gray-600 text-sm"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
         {/* Settings Panel */}
         {showPanelSettings && (
