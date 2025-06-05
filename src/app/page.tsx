@@ -135,8 +135,9 @@ export default function Home() {
             Add commentMore actions
             {/* Quote content */}
             <div className="text-sm text-gray-700 mb-2 leading-relaxed">
-              "{currentQuote.quote}"
+              <span>&ldquo;</span>{currentQuote.quote}<span>&rdquo;</span>
             </div>
+
             
             {/* Author */}
             <div className="text-xs text-gray-500 font-medium text-right">
